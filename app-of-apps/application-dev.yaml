@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: june13-test-2-app
+  namespace: ai-rhdh
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+spec:
+  project: default
+  source:
+    path: ./components/june13-test-2/overlays/development
+    repoURL: https://github.com/jdubrick-ai/june13-test-2-gitops.git
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: rhdh-app
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        argocd.argoproj.io/managed-by: ai-rhdh
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

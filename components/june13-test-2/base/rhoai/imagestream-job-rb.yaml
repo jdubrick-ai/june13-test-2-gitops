@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: june13-test-2-imagestream-job-rolebinding
+  namespace: redhat-ods-applications
+subjects:
+  - kind: ServiceAccount
+    name: june13-test-2-dsp-job
+    namespace: rhdh-app
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: june13-test-2-imagestream-job-role

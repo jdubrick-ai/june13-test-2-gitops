@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dsp-clone-job-june13-test-2-gitops
+spec:
+  template:
+    metadata:
+      name: dsp-clone-job-june13-test-2-gitops
+    spec:
+      serviceAccountName: june13-test-2-dsp-job
+      containers:
+        - name: initialize-dsp
+          image: quay.io/redhat-ai-dev/utils:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+              oc wait -l statefulset=june13-test-2-notebook --for=condition=ready pod --timeout=300s
+              oc exec  StatefulSet/june13-test-2-notebook -- git clone https://github.com/jdubrick-ai/june13-test-2
+      restartPolicy: Never

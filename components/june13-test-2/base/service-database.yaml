@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: june13-test-2-database
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: june13-test-2-database
+  name: june13-test-2-database
+spec:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+  selector:
+    app.kubernetes.io/instance: june13-test-2-database

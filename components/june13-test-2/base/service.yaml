@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: june13-test-2
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: june13-test-2
+  name: june13-test-2
+spec:
+  ports:
+    - port: 8501
+      protocol: TCP
+      targetPort: 8501
+  selector:
+    app.kubernetes.io/instance: june13-test-2
